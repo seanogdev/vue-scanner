@@ -3,14 +3,16 @@
   "version": "1.0.0",
   "description": "A tool to scan vue files and generate a json file with all the components and their props",
   "bin": {
-    "vue-scanner": "/dist/cli.js"
+    "vue-scanner": "/dist/cli.mjs"
   },
-  "main": "/lib/.ts",
+  "main": "/dist/api.mjs",
+  "type": "module",
   "scripts": {
-    "build": "tsup lib/index.ts lib/cli.ts --format esm,cjs --dts",
+    "build": "tsup lib/api.ts lib/cli.ts --format esm,cjs --dts",
     "dev": "pnpm build --watch",
     "lint": "eslint --ext .ts .",
-    "test": "vitest"
+    "test": "vitest",
+    "test-example": "node example/index.js"
   },
   "keywords": [],
   "author": "",

@@ -4,18 +4,19 @@ import { ComponentInstance, ComponentMetric } from "../types.js";
 type TransformNodeOptions = {
   node: RootNode | TemplateChildNode;
   path: string;
-  metric: ComponentMetric | undefined;
+  componentMetric: ComponentMetric | undefined;
 };
 
-export function transformNode({ metric, path, node }: TransformNodeOptions) {
-  // Only lookup components
-  // NodeTypes.ELEMENT = 1
-  // ElementTypes.COMPONENT = 1
+export function transformNode({
+  componentMetric,
+  path,
+  node,
+}: TransformNodeOptions) {
   if (node.type !== 1 || node.tagType !== 1) {
     return;
   }
 
-  const localMetric = metric ?? {
+  const localMetric = componentMetric ?? {
     name: node.tag,
     instanceCount: 0,
     instances: [],
