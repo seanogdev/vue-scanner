@@ -1,5 +1,5 @@
 import { ElementNode, NodeTypes, buildProps } from '@vue/compiler-dom';
-import { VueScannerContext } from '../types.js';
+import { VueScannerContext } from './types.js';
 
 /**
  * Get the props of an element node

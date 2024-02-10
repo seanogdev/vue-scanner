@@ -1,6 +1,6 @@
 import { readFile } from 'fs/promises';
 import { parse, transform } from '@vue/compiler-dom';
-import { extractNodeStats } from './node/extract.js';
+import { extractNodeStats } from './node.js';
 import { VueScannerContext } from './types.js';
 
 export function extract(context: VueScannerContext) {

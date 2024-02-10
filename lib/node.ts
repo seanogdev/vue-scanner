@@ -6,7 +6,7 @@ import {
   RootNode,
   TemplateChildNode,
 } from '@vue/compiler-dom';
-import { ComponentInstance, ComponentMetric, VueScannerContext } from '../types.js';
+import { ComponentInstance, ComponentMetric, VueScannerContext } from './types.js';
 import { getPropInfo } from './props.js';
 import { getSlotInfo } from './slots.js';
 

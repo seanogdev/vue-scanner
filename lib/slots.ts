@@ -1,5 +1,5 @@
 import { ElementNode, NodeTypes, DirectiveNode, AttributeNode } from '@vue/compiler-dom';
-import { VueScannerContext } from '../types.js';
+import { VueScannerContext } from './types.js';
 
 const defaultSlotName = 'default';
 

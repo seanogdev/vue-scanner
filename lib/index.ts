@@ -1,10 +1,11 @@
 import path from 'path';
+import { writeFile } from 'fs/promises';
 import pc from 'picocolors';
-const { writeFile } = await import('fs/promises');
 import { glob } from 'glob';
+
 import { getContext } from './context.js';
 import { extract } from './extract.js';
-import { ComponentMetric, VueScannerConfig, VueScannerContext } from './types.js';
+import { VueScannerConfig, VueScannerContext } from './types.js';
 
 async function writeToFile(context: VueScannerContext) {
   const filePath = path.resolve(context.config.output);
@@ -23,7 +24,7 @@ export async function scan(directory: string, config: Partial<VueScannerConfig>)
   await Promise.all(promises);
 
   if (context.config.output) {
-    writeToFile(context);
+    await writeToFile(context);
   } else {
     return Object.fromEntries(context.componentMetrics);
   }
