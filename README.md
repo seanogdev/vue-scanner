@@ -44,6 +44,24 @@ const result = scan(resolve(__dirname, "src")), {
 });
 ```
 
+## Command Line Options
+
+The program accepts the following command line arguments and options:
+
+### Arguments
+
+- `[directory]`: Specifies the directory to scan. If not provided, the program will use the default directory (`./`).
+
+### Options
+
+- `-O, --output <output>`: Specifies the output file. If not provided, the program will use the default output file specified in the configuration.
+
+- `-P, --no-prop-stats`: If this option is set, the program will not collect prop statistics. By default, prop statistics are collected as specified in the configuration.
+
+- `-S, --no-slot-stats`: If this option is set, the program will not collect slot statistics. By default, slot statistics are collected as specified in the configuration.
+
+- `-L, --no-location-stats`: If this option is set, the program will not collect file location statistics. By default, file location statistics are collected as specified in the configuration.
+
 ## Limitations
 
 This tool only **offically** works wit Vue 3 projects. It may work with Vue 2 projects, but it's not a goal of this project.
