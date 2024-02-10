@@ -12,21 +12,16 @@ The API was partly inspired by [react-scanner](https://github.com/moroshko/react
 
 ## Installation
 
+- pnpm
+
+  ```bash
+  pnpm add -D vue-scanner
+  ```
+
 - npm
 
   ```bash
   npm install --save-dev vue-scanner
-  ```
-
-- yarn
-
-  ```bash
-  yarn add -D vue-scanner
-  ```
-
-- pnpm
-  ```bash
-  pnpm add -D vue-scanner
   ```
 
 ## Usage
@@ -34,7 +29,7 @@ The API was partly inspired by [react-scanner](https://github.com/moroshko/react
 ### CLI
 
 ```bash
-vue-scanner --directory directory --output output.json
+vue-scanner directory --output output.json
 ```
 
 ### API
@@ -44,12 +39,11 @@ import { scan } from "vue-scanner";
 import { resolve } from "path";
 
 
-const result = scan({
-  directory: resolve(__dirname, "src")
+const result = scan(resolve(__dirname, "src")), {
   output: "report.json",
 });
 ```
 
 ## Limitations
 
-This tool only supports Vue 3 projects. It also does not support JSX syntax.
+This tool only **offically** works wit Vue 3 projects. It may work with Vue 2 projects, but it's not a goal of this project.

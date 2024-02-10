@@ -1,7 +1,19 @@
-/* eslint-env node */
 module.exports = {
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+  extends: ['airbnb-base', 'airbnb-typescript/base', 'plugin:@typescript-eslint/recommended'],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'plugin:vue/vue3-recommended'],
+  parserOptions: {
+    project: './tsconfig.json',
+  },
+  plugins: ['@typescript-eslint', 'prettier'],
+  rules: {
+    'no-console': 'off',
+    quotes: ['error', 'single', { allowTemplateLiterals: true }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: ['tsup'],
+      },
+    ],
+  },
   root: true,
 };

@@ -1,7 +1,8 @@
 import { ComponentMetrics, VueScannerConfig } from './types.js';
 
+export const defaultDirectory = './';
+
 export const defaultConfig: VueScannerConfig = {
-  directory: './src',
   collect: {
     slots: true,
     props: true,
@@ -20,12 +21,12 @@ function resolveConfig(config: Partial<VueScannerConfig>) {
   return { ...defaultConfig, ...config };
 }
 
-export function getContext(config: Partial<VueScannerConfig>) {
+export function getContext(directory: string = defaultDirectory, config: Partial<VueScannerConfig>) {
   const componentMetrics: ComponentMetrics = new Map();
   const resolvedConfig = resolveConfig(config);
 
   return {
-    glob: `${config.directory}/**/*.vue`,
+    directory,
     componentMetrics,
     config: resolvedConfig,
   };

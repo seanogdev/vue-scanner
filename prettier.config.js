@@ -9,4 +9,4 @@ export default {
   trailingComma: 'all',
   arrowParens: 'always',
   htmlWhitespaceSensitivity: 'ignore',
-}
+};

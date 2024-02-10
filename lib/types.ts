@@ -1,7 +1,6 @@
 import { ParserOptions } from '@vue/compiler-dom';
 
 export type VueScannerConfig = {
-  directory: string;
   collect: {
     slots: boolean;
     props: boolean;
@@ -16,7 +15,7 @@ export type VueScannerConfig = {
 export type VueScannerContext = {
   componentMetrics: ComponentMetrics;
   config: VueScannerConfig;
-  glob: string;
+  directory: string;
 };
 
 export type ComponentInstanceLocation = {

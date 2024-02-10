@@ -17,5 +17,5 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node16"
   },
-  "include": ["lib", "tsup.config.ts"]
+  "include": ["lib", "tsup.config.ts", ".eslint.config.cjs"]
 }
