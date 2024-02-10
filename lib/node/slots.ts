@@ -1,5 +1,5 @@
 import { ElementNode, NodeTypes, DirectiveNode, AttributeNode } from '@vue/compiler-dom';
-import { VueScannerConfig } from '../types.js';
+import { VueScannerContext } from '../types.js';
 
 const defaultSlotName = 'default';
 
@@ -10,8 +10,8 @@ function isSlotDirectiveNode(node: AttributeNode | DirectiveNode): node is Direc
 /**
  * Get the slots of an element node
  */
-export function getSlotInfo(node: ElementNode, config: VueScannerConfig) {
-  if (node.children.length === 0 || config.collectSlotStats === false) {
+export function getSlotInfo(node: ElementNode, context: VueScannerContext) {
+  if (node.children.length === 0 || context.config.collectSlotStats === false) {
     return undefined;
   }
 

@@ -1,10 +1,10 @@
-import { ElementNode, NodeTypes, TemplateNode } from '@vue/compiler-dom';
-import { VueScannerConfig } from '../types.js';
+import { ElementNode, NodeTypes } from '@vue/compiler-dom';
+import { VueScannerContext } from '../types.js';
 
 /**
  * Get the props of an element node
  */
-export function getPropInfo(node: ElementNode, config: VueScannerConfig) {
+export function getPropInfo(node: ElementNode, context: VueScannerContext) {
   const props = [];
 
   for (const prop of node.props) {

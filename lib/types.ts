@@ -8,6 +8,11 @@ export type VueScannerConfig = {
   };
 };
 
+export type VueScannerContext = {
+  componentMetrics: ComponentMetrics;
+  config: VueScannerConfig;
+};
+
 export type ComponentInstanceLocation = {
   file: string;
   start: {

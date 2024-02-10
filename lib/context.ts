@@ -10,6 +10,15 @@ const defaultConfig: VueScannerConfig = {
   },
 };
 
-export function resolveConfig(config: Partial<VueScannerConfig>) {
+const componentMetrics = new Map();
+
+function resolveConfig(config: Partial<VueScannerConfig>) {
   return { ...defaultConfig, ...config };
+}
+
+export function getContext(config: Partial<VueScannerConfig>) {
+  return {
+    componentMetrics,
+    config: resolveConfig(config),
+  };
 }

@@ -7,22 +7,18 @@ import {
   TemplateChildNode,
   TransformContext,
 } from '@vue/compiler-dom';
-import { ComponentInstance, ComponentMetric, ComponentMetrics, VueScannerConfig } from '../types.js';
+import { ComponentMetric, VueScannerContext } from '../types.js';
 import { getPropInfo } from './props.js';
 import { getSlotInfo } from './slots.js';
 
-export function createNodeTransform(
-  componentMetrics: ComponentMetrics,
-  path: string,
-  config: VueScannerConfig,
-): NodeTransform {
+export function extractNodeStats(path: string, context: VueScannerContext): NodeTransform {
   /**
    * Get the local metric for the component
    * Either returns the existing metric or a new metric with the default values
    */
   function getComponentMetric(node: ElementNode): ComponentMetric {
     return (
-      componentMetrics.get(node.tag) ?? {
+      context.componentMetrics.get(node.tag) ?? {
         instanceCount: 0,
         instances: [],
         name: node.tag,
@@ -46,7 +42,7 @@ export function createNodeTransform(
   /**
    * Extract the component instance stats from the node
    */
-  function nodeTransform(node: RootNode | TemplateChildNode) {
+  return (node: RootNode | TemplateChildNode) => {
     if (node.type !== NodeTypes.ELEMENT || ![ElementTypes.ELEMENT, ElementTypes.COMPONENT].includes(node.tagType)) {
       return;
     }
@@ -56,12 +52,10 @@ export function createNodeTransform(
 
     metric.instances.push({
       location: generateInstanceLocation(node),
-      props: getPropInfo(node, config),
-      slots: getSlotInfo(node, config),
+      props: getPropInfo(node, context),
+      slots: getSlotInfo(node, context),
     });
 
-    componentMetrics.set(node.tag, metric);
-  }
-
-  return nodeTransform;
+    context.componentMetrics.set(node.tag, metric);
+  };
 }

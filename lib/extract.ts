@@ -1,17 +1,18 @@
-import { ElementTypes, NodeTypes, parse, transform } from '@vue/compiler-dom';
-import { createNodeTransform } from './node/transform.js';
 import { readFile } from 'fs/promises';
-import { VueScannerConfig } from './types.js';
-const componentMetrics = new Map();
+import { parse, transform } from '@vue/compiler-dom';
+import { extractNodeStats } from './node/extract.js';
+import { VueScannerContext } from './types.js';
 
-export async function extract(path: string, config: VueScannerConfig) {
-  const contents = await readFile(path, 'utf-8');
+export function extract(context: VueScannerContext) {
+  return async (path: string) => {
+    const contents = await readFile(path, 'utf-8');
 
-  const ast = parse(contents, config.compiler.parserOptions);
+    const ast = parse(contents, context.config.compiler.parserOptions);
 
-  transform(ast, {
-    nodeTransforms: [createNodeTransform(componentMetrics, path, config)],
-  });
+    transform(ast, {
+      nodeTransforms: [extractNodeStats(path, context)],
+    });
 
-  console.log('componentMetrics:', componentMetrics);
+    console.log('componentMetrics:', context.componentMetrics);
+  };
 }
