@@ -2,15 +2,21 @@ import { ParserOptions } from '@vue/compiler-dom';
 
 export type VueScannerConfig = {
   directory: string;
-  collectSlotStats: boolean;
+  collect: {
+    slots: boolean;
+    props: boolean;
+    location: boolean;
+  };
   compiler: {
     parserOptions: ParserOptions;
   };
+  output: string;
 };
 
 export type VueScannerContext = {
   componentMetrics: ComponentMetrics;
   config: VueScannerConfig;
+  glob: string;
 };
 
 export type ComponentInstanceLocation = {
@@ -26,7 +32,7 @@ export type ComponentInstanceProps = Record<string, string>;
 export type ComponentInstanceSlots = Record<string, string>;
 
 export type ComponentInstance = {
-  location: ComponentInstanceLocation;
+  location?: ComponentInstanceLocation;
   props?: ComponentInstanceProps;
   slots?: ComponentInstanceSlots;
 };

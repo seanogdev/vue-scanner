@@ -1,0 +1,116 @@
+{
+  "template": {
+    "instanceCount": 2,
+    "instances": [
+      {
+        "location": {
+          "file": "test/Component.vue",
+          "start": {
+            "line": 1,
+            "column": 1
+          }
+        },
+        "slots": {
+          "default": "<button type=\"button\">Not a component</button>"
+        }
+      },
+      {
+        "location": {
+          "file": "test/Component copy.vue",
+          "start": {
+            "line": 1,
+            "column": 1
+          }
+        },
+        "slots": {
+          "default": "<button type=\"button\">Not a component</button>"
+        }
+      }
+    ],
+    "name": "template"
+  },
+  "ButtonComponent": {
+    "instanceCount": 2,
+    "instances": [
+      {
+        "location": {
+          "file": "test/Component.vue",
+          "start": {
+            "line": 2,
+            "column": 3
+          }
+        },
+        "slots": {}
+      },
+      {
+        "location": {
+          "file": "test/Component copy.vue",
+          "start": {
+            "line": 2,
+            "column": 3
+          }
+        },
+        "slots": {}
+      }
+    ],
+    "name": "ButtonComponent"
+  },
+  "button-component": {
+    "instanceCount": 2,
+    "instances": [
+      {
+        "location": {
+          "file": "test/Component.vue",
+          "start": {
+            "line": 3,
+            "column": 3
+          }
+        },
+        "slots": {}
+      },
+      {
+        "location": {
+          "file": "test/Component copy.vue",
+          "start": {
+            "line": 3,
+            "column": 3
+          }
+        },
+        "slots": {}
+      }
+    ],
+    "name": "button-component"
+  },
+  "button": {
+    "instanceCount": 2,
+    "instances": [
+      {
+        "location": {
+          "file": "test/Component.vue",
+          "start": {
+            "line": 4,
+            "column": 3
+          }
+        },
+        "props": {
+          "type": "button"
+        },
+        "slots": {}
+      },
+      {
+        "location": {
+          "file": "test/Component copy.vue",
+          "start": {
+            "line": 4,
+            "column": 3
+          }
+        },
+        "props": {
+          "type": "button"
+        },
+        "slots": {}
+      }
+    ],
+    "name": "button"
+  }
+}

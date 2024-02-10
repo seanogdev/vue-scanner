@@ -3,12 +3,12 @@ import { getContext } from './context.js';
 import { extract } from './extract.js';
 import { VueScannerConfig } from './types.js';
 
-export async function VueScanner(config: VueScannerConfig) {
+export async function VueScanner(config: Partial<VueScannerConfig>) {
   const context = getContext(config);
-  const scannerGlob = `${context.config.directory}/**/*.vue`;
-  const filePaths = await glob(scannerGlob, { windowsPathsNoEscape: true });
+  const filePaths = await glob(context.glob, { windowsPathsNoEscape: true });
+
   const promises = filePaths.map(extract(context));
   await Promise.all(promises);
 
-  return context.componentMetrics;
+  return Object.fromEntries(context.componentMetrics);
 }

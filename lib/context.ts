@@ -1,24 +1,32 @@
-import { VueScannerConfig } from './types.js';
+import { ComponentMetrics, VueScannerConfig } from './types.js';
 
-const defaultConfig: VueScannerConfig = {
+export const defaultConfig: VueScannerConfig = {
   directory: './src',
-  collectSlotStats: true,
+  collect: {
+    slots: true,
+    props: true,
+    location: true,
+  },
   compiler: {
     parserOptions: {
       comments: true,
     },
   },
+  output: './componentInfo.json',
 };
 
-const componentMetrics = new Map();
-
+// TODO: Merge these configs deeply
 function resolveConfig(config: Partial<VueScannerConfig>) {
   return { ...defaultConfig, ...config };
 }
 
 export function getContext(config: Partial<VueScannerConfig>) {
+  const componentMetrics: ComponentMetrics = new Map();
+  const resolvedConfig = resolveConfig(config);
+
   return {
+    glob: `${config.directory}/**/*.vue`,
     componentMetrics,
-    config: resolveConfig(config),
+    config: resolvedConfig,
   };
 }

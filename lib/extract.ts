@@ -12,7 +12,5 @@ export function extract(context: VueScannerContext) {
     transform(ast, {
       nodeTransforms: [extractNodeStats(path, context)],
     });
-
-    console.log('componentMetrics:', context.componentMetrics);
   };
 }

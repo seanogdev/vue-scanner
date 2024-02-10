@@ -5,6 +5,9 @@ import { VueScannerContext } from '../types.js';
  * Get the props of an element node
  */
 export function getPropInfo(node: ElementNode, context: VueScannerContext) {
+  if (!context.config.collect.props) {
+    return undefined;
+  }
   const props = [];
 
   for (const prop of node.props) {

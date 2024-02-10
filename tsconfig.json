@@ -12,9 +12,10 @@
     "noUncheckedIndexedAccess": true,
     "strict": true,
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node16"
   },
-  "include": ["lib"]
+  "include": ["lib", "tsup.config.ts"]
 }

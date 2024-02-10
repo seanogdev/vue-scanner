@@ -30,6 +30,9 @@ export function extractNodeStats(path: string, context: VueScannerContext): Node
    * Generate the location of the component instance
    */
   function generateInstanceLocation(node: ElementNode) {
+    if (context.config.collect.location === false) {
+      return undefined;
+    }
     return {
       file: path,
       start: {
