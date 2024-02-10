@@ -1,5 +1,5 @@
-import { collectData } from "./collectData.js";
+import { VueScanner } from './index.js';
 
-export default collectData;
+export default VueScanner;
 
-export { collectData };
+export { VueScanner };

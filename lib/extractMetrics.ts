@@ -1,31 +1,27 @@
-import { parse, transform } from "@vue/compiler-dom";
-import { basename } from "path";
-import { transformNode } from "./transformNode.js";
-import { ComponentMetric } from "../types.js";
+import { isTemplateNode, parse, transform } from '@vue/compiler-dom';
+import { getNodeInstance } from './getNodeInstance.js';
+import { readFile } from 'fs/promises';
 
-const componentMetrics = new Map<string, ComponentMetric>();
+const componentMetrics = new Map();
 
-export async function extractMetrics(code: string, path: string) {
-  console.log("code:", code);
-  const name = basename(path);
-
-  const ast = parse(code, {
-    comments: true,
-  });
+export async function extractMetrics(path: string) {
+  const contents = await readFile(path, 'utf-8');
+  const ast = parse(contents, { comments: true });
 
   transform(ast, {
     nodeTransforms: [
       (node) => {
-        const metric = transformNode({
+        if (!isTemplateNode(node)) {
+          return;
+        }
+
+        getNodeInstance({
           node,
           path,
-          componentMetric: componentMetrics.get(path),
+          componentMetrics,
         });
-        if (metric) {
-          componentMetrics.set(name, metric);
-        }
       },
     ],
   });
-  console.log("componentMetrics:", componentMetrics);
+  console.log('componentMetrics:', componentMetrics);
 }

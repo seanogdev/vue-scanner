@@ -1,9 +1,6 @@
-import { RootNode } from "@vue/compiler-dom";
-
-export type FileEntry = [string, RootNode];
-
 export type ComponentInstance = {
   location: {
+    id: string;
     path: string;
     start: {
       line: number;
@@ -11,6 +8,7 @@ export type ComponentInstance = {
     };
   };
   props?: Record<string, string>;
+  slots?: Record<string, string>;
 };
 
 export type ComponentMetric = {
@@ -18,3 +16,5 @@ export type ComponentMetric = {
   instanceCount: number;
   instances: ComponentInstance[];
 };
+
+export type ComponentMetrics = Map<string, ComponentMetric>;
