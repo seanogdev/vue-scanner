@@ -15,13 +15,21 @@ program.version(version);
 
 program
   .argument('[directory]', 'The directory to scan', defaultDirectory)
-  .option('-O, --output <output>', 'Output file', defaultConfig.output)
-  .option('-P, --no-prop-stats', "Don't collect prop stats", defaultConfig.collect.props)
-  .option('-S, --no-slot-stats', "Don't collect slot stats", defaultConfig.collect.slots)
-  .option('-L, --no-location-stats', "Don't collect file location stats", defaultConfig.collect.location)
-  .action(async (directory: string, config: Partial<VueScannerConfig>) => {
+  .option('-O, --output [output]', 'Output file', defaultConfig.output)
+  .option('-P, --collect-prop-data [boolean]', "Don't collect prop stats", defaultConfig.collect.props)
+  .option('-S, --collect-slot-data [boolean]', "Don't collect slot stats", defaultConfig.collect.slots)
+  .option('-L, --collect-location-data [boolean]', "Don't collect file location stats", defaultConfig.collect.location)
+  .action(async (directory: string, config: Record<string, unknown>) => {
+    console.log('config:', config);
     const start = performance.now();
-    const res = await scan(directory, config);
+    const res = await scan(directory, {
+      collect: {
+        props: config.props !== 'false',
+        slots: config.slots !== 'false',
+        location: config.locations !== 'false',
+      },
+      output: config.output as string,
+    });
     if (res) {
       console.log(JSON.stringify(res, null, 2));
     }

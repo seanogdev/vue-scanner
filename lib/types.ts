@@ -30,11 +30,11 @@ export type ComponentInstanceProps = Record<string, string>;
 
 export type ComponentInstanceSlots = Record<string, string>;
 
-export type ComponentInstance = {
+export type ComponentInstance = Partial<{
   location?: ComponentInstanceLocation;
   props?: ComponentInstanceProps;
   slots?: ComponentInstanceSlots;
-};
+}>;
 
 export type ComponentMetric = {
   name: string;

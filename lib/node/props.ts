@@ -1,40 +1,31 @@
-import { ElementNode, NodeTypes } from '@vue/compiler-dom';
+import { ElementNode, NodeTypes, buildProps } from '@vue/compiler-dom';
 import { VueScannerContext } from '../types.js';
 
 /**
  * Get the props of an element node
  */
-export function getPropInfo(node: ElementNode, context: VueScannerContext) {
-  if (!context.config.collect.props) {
-    return undefined;
-  }
-  const props = [];
+export function getPropInfo(node: ElementNode) {
+  const props = new Map<string, string>();
 
-  for (const prop of node.props) {
-    if (prop.type === NodeTypes.DIRECTIVE) {
-      if (prop.arg?.type === NodeTypes.SIMPLE_EXPRESSION && prop.exp?.type === NodeTypes.SIMPLE_EXPRESSION) {
-        if (prop.arg) {
-          return props.push([prop.arg.content, prop.exp.content]);
-        } else {
-          // Convert v-bind="object" into multiple props
-          const parsed = JSON.parse(prop.exp.content);
-          if (typeof parsed === 'object') {
-            for (const bindProp of Object.entries(parsed)) {
-              props.push(bindProp);
-            }
-          }
-        }
-      }
-    } else if (prop.type === NodeTypes.ATTRIBUTE) {
-      if (prop.value?.type === NodeTypes.TEXT) {
-        props.push([prop.name, prop.value.content ?? true]);
-      }
+  node.props.forEach((attribute) => {
+    // Static props
+    if (attribute.type === NodeTypes.ATTRIBUTE) {
+      const propName = attribute.name;
+      const propValue = attribute.value?.content ?? 'true';
+      props.set(propName, propValue);
     }
-  }
 
-  if (props.length === 0) {
-    return undefined;
-  }
+    // Bound props
+    else if (
+      attribute.type === NodeTypes.DIRECTIVE &&
+      attribute.arg?.type === NodeTypes.SIMPLE_EXPRESSION &&
+      attribute.exp?.type === NodeTypes.SIMPLE_EXPRESSION
+    ) {
+      const propName = attribute.arg.content ?? 'v-bind';
+      const propValue = attribute.exp.content ?? 'true';
+      props.set(propName, propValue);
+    }
+  });
 
   return Object.fromEntries(props);
 }

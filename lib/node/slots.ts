@@ -11,9 +11,6 @@ function isSlotDirectiveNode(node: AttributeNode | DirectiveNode): node is Direc
  * Get the slots of an element node
  */
 export function getSlotInfo(node: ElementNode, context: VueScannerContext) {
-  if (!context.config.collect.slots) {
-    return undefined;
-  }
   if (node.children.length === 0) {
     return undefined;
   }

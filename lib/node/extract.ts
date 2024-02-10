@@ -6,7 +6,7 @@ import {
   RootNode,
   TemplateChildNode,
 } from '@vue/compiler-dom';
-import { ComponentMetric, VueScannerContext } from '../types.js';
+import { ComponentInstance, ComponentMetric, VueScannerContext } from '../types.js';
 import { getPropInfo } from './props.js';
 import { getSlotInfo } from './slots.js';
 
@@ -29,9 +29,6 @@ export function extractNodeStats(path: string, context: VueScannerContext): Node
    * Generate the location of the component instance
    */
   function generateInstanceLocation(node: ElementNode) {
-    if (context.config.collect.location === false) {
-      return undefined;
-    }
     return {
       file: path,
       start: {
@@ -57,11 +54,21 @@ export function extractNodeStats(path: string, context: VueScannerContext): Node
 
     metric.instanceCount += 1;
 
-    metric.instances.push({
-      location: generateInstanceLocation(node),
-      props: getPropInfo(node, context),
-      slots: getSlotInfo(node, context),
-    });
+    const instance: ComponentInstance = {};
+
+    if (context.config.collect.props) {
+      instance.props = getPropInfo(node);
+    }
+
+    if (context.config.collect.slots) {
+      instance.slots = getSlotInfo(node, context);
+    }
+
+    if (context.config.collect.location) {
+      instance.location = generateInstanceLocation(node);
+    }
+
+    metric.instances.push(instance);
 
     context.componentMetrics.set(node.tag, metric);
   };

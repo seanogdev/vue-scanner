@@ -54,13 +54,13 @@ The program accepts the following command line arguments and options:
 
 ### Options
 
-- `-O, --output <output>`: Specifies the output file. If not provided, the program will use the default output file specified in the configuration.
+- `-O, --output <output>`: Specifies the output file. If not provided, the program will use the default output file specified in the configuration (`./vue-scanner-report.json`).
 
-- `-P, --no-prop-stats`: If this option is set, the program will not collect prop statistics. By default, prop statistics are collected as specified in the configuration.
+- `-P, --collect-prop-data <boolean>`: If this option is set to `false`, the program will not collect prop statistics. By default, prop statistics are collected as specified in the configuration (`true`).
 
-- `-S, --no-slot-stats`: If this option is set, the program will not collect slot statistics. By default, slot statistics are collected as specified in the configuration.
+- `-S, --collect-slot-data <boolean>`: If this option is set to `false`, the program will not collect slot statistics. By default, slot statistics are collected as specified in the configuration (`true`).
 
-- `-L, --no-location-stats`: If this option is set, the program will not collect file location statistics. By default, file location statistics are collected as specified in the configuration.
+- `-L, --collect-location-data <boolean>`: If this option is set to `false`, the program will not collect file location statistics. By default, file location statistics are collected as specified in the configuration (`true`).
 
 ## Limitations
 
