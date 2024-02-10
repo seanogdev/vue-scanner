@@ -1,14 +1,29 @@
-export type ComponentInstance = {
-  location: {
-    id: string;
-    path: string;
-    start: {
-      line: number;
-      column: number;
-    };
+import { ParserOptions } from '@vue/compiler-dom';
+
+export type VueScannerConfig = {
+  directory: string;
+  collectSlotStats: boolean;
+  compiler: {
+    parserOptions: ParserOptions;
   };
-  props?: Record<string, string>;
-  slots?: Record<string, string>;
+};
+
+export type ComponentInstanceLocation = {
+  file: string;
+  start: {
+    line: number;
+    column: number;
+  };
+};
+
+export type ComponentInstanceProps = Record<string, string>;
+
+export type ComponentInstanceSlots = Record<string, string>;
+
+export type ComponentInstance = {
+  location: ComponentInstanceLocation;
+  props?: ComponentInstanceProps;
+  slots?: ComponentInstanceSlots;
 };
 
 export type ComponentMetric = {

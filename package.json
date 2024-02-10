@@ -18,19 +18,19 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.10.4",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
-    "@vue/compiler-dom": "^3.3.11",
-    "eslint": "^8.55.0",
-    "eslint-plugin-vue": "^9.19.2",
+    "@types/node": "^20.11.17",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "@vue/compiler-dom": "^3.4.18",
+    "eslint": "^8.56.0",
+    "eslint-plugin-vue": "^9.21.1",
     "glob": "^10.3.10",
-    "prettier": "^3.1.1",
-    "tsup": "^8.0.1",
+    "prettier": "^3.2.5",
+    "tsup": "^8.0.2",
     "typescript": "^5.3.3",
-    "vitest": "^1.0.4"
+    "vitest": "^1.2.2"
   },
   "dependencies": {
-    "commander": "^11.1.0"
+    "commander": "^12.0.0"
   }
 }

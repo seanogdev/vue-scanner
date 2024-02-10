@@ -1,15 +1,16 @@
 import { glob } from 'glob';
-import { extractMetrics } from './extractMetrics.js';
+import { resolveConfig } from './config.js';
+import { extract } from './extract.js';
+import { VueScannerConfig } from './types.js';
 
-type VueScannerOptions = {
-  directory: string;
-};
+export async function VueScanner(config: VueScannerConfig) {
+  const resolvedConfig = resolveConfig(config);
 
-export async function VueScanner(options: VueScannerOptions) {
-  const filePaths = await glob(`${options.directory}/**/*.vue`, {
+  const filePaths = await glob(`${resolvedConfig.directory}/**/*.vue`, {
     windowsPathsNoEscape: true,
   });
 
-  const extractMetricsPromises = filePaths.map(extractMetrics);
+  const extractMetricsPromises = filePaths.map((path) => extract(path, resolvedConfig));
+
   return Promise.all(extractMetricsPromises);
 }
