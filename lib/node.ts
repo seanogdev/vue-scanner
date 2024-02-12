@@ -5,6 +5,7 @@ import {
   NodeTransform,
   RootNode,
   TemplateChildNode,
+  TransformContext,
 } from '@vue/compiler-dom';
 import { ComponentInstance, ComponentMetric, VueScannerContext } from './types.js';
 import { getPropInfo } from './props.js';
@@ -41,11 +42,12 @@ export function extractNodeStats(path: string, context: VueScannerContext): Node
   /**
    * Extract the component instance stats from the node
    */
-  return (node: RootNode | TemplateChildNode) => {
+  return (node: RootNode | TemplateChildNode, transformContext: TransformContext) => {
     if (
       node.type !== NodeTypes.ELEMENT ||
       ![ElementTypes.ELEMENT, ElementTypes.COMPONENT].includes(node.tagType) ||
-      ['template', 'script', 'style'].includes(node.tag)
+      ['template'].includes(node.tag) ||
+      transformContext.isBuiltInComponent(node.tag)
     ) {
       return;
     }
